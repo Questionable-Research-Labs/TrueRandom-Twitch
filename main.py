@@ -28,8 +28,11 @@ class Bot(commands.Bot):
     async def roll_command(self, ctx):
         await ctx.send(f'Hang on a second... Rolling!')
         num = get_dice_roll()
-        print(num)
-        await ctx.send(f'Rolled a {num}!')
+        if num is not False:
+            print(num)
+            await ctx.send(f'Rolled a {num}!')
+        else:
+            await ctx.send(f'Dice roll failed...')
     
     @commands.command(name='alive')
     async def alive_command(self, ctx):
@@ -47,8 +50,10 @@ def initialize_twitch():
 def get_dice_roll():
     response = requests.get("https://tr.host.qrl.nz/api/twitch/random")
     print("got number",response)
-    number = int(json.loads(response.text)["response"])
-    return number
+    try:
+        return int(json.loads(response.text)["response"])
+    except:
+        return False
 if __name__=="__main__":
 
     initialize_twitch()
