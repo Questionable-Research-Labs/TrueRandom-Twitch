@@ -4,6 +4,10 @@ from twitchio.ext import commands
 import requests
 import json
 
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 class Bot(commands.Bot):
 
@@ -38,9 +42,5 @@ def get_dice_roll():
     number = int(json.loads(response.text)["response"])
     return number
 if __name__=="__main__":
-    from dotenv import load_dotenv
-    # import dice_content
 
-
-    load_dotenv()
     initialize_twitch()
