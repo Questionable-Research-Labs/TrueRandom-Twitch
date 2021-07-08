@@ -26,10 +26,18 @@ class Bot(commands.Bot):
     # Commands use a different decorator
     @commands.command(name='roll')
     async def roll_command(self, ctx):
+        await ctx.send(f'Hang on a second... Rolling!')
         num = get_dice_roll()
         print(num)
         await ctx.send(f'Rolled a {num}!')
-
+    
+    @commands.command(name='alive')
+    async def alive_command(self, ctx):
+        await ctx.send(f'I am at least partially alive!')
+    
+    @commands.command(name='help')
+    async def alive_command(self, ctx):
+        await ctx.send(f'Use !roll to roll a random number, and !alive to check the twitch bot is alive.')
 
 def initialize_twitch():
     global bot
